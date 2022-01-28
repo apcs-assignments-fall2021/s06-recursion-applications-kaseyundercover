@@ -14,17 +14,24 @@ public class MyMain {
 
     // Wrapper Method
     public static boolean binarySearch(int[] arr, int num) {
-        return binarySearchTR(arr, num, 0, arr.length-1);
+        return binarySearchTR(arr, num, 0, arr.length - 1);
     }
 
     // Tail recursive method:
     public static boolean binarySearchTR(int[] arr, int num, int lowerBound, int upperBound) {
-        // YOUR CODE HERE
-        return false;
+        int middle = lowerBound + (upperBound - lowerBound) / 2;
+        if (lowerBound > upperBound) {
+            return false;
+        } else if (arr[middle] < num) {
+            return binarySearchTR(arr, num, middle + 1, upperBound);
+        } else if (arr[middle] > num) {
+            return binarySearchTR(arr, num, lowerBound, middle - 1);
+        } else {
+            return true;
+
+
+        }
     }
-
-
-
 
 
     // ********************
@@ -68,7 +75,33 @@ public class MyMain {
     // Then we need to copy the rest of the array
 
     public static int[] merge(int[] arr1, int[] arr2) {
-        // YOUR CODE HERE
-        return null;
+        int[] merged = new int[(arr1.length + arr2.length)];
+        int arr1Index = 0;
+        int arr2Index = 0;
+        int mergedIndex = 0;
+    while (arr1Index < arr1.length && arr2Index<arr2.length) {
+        if (arr1[arr1Index] < arr2[arr2Index]) {
+            merged[mergedIndex] = arr1[arr1Index];
+            arr1Index++;
+            mergedIndex++;
+        } else {
+            merged[mergedIndex] = arr2[arr2Index];
+            arr2Index++;
+            mergedIndex++;
+        }
+    }
+    while (arr1Index< arr1.length){
+        merged[mergedIndex]=arr1[arr1Index];
+        mergedIndex++;
+        arr1Index++;
+    }
+    while (arr2Index<arr2.length){
+        merged[mergedIndex]=arr2[arr2Index];
+        mergedIndex++;
+        arr2Index++;
+    }
+
+        return merged;
+
     }
 }
